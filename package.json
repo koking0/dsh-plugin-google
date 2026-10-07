@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-google",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "DeepSeek Harness plugin for Google Calendar and Google Tasks: conversational CRUD over events, calendars, tasks and task lists, with built-in OAuth 2.0 loopback authorization",
   "license": "MIT",
