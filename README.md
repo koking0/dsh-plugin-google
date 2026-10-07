@@ -394,8 +394,9 @@ DSH 社区插件市场（`dsh-plugin-shop-catalog`，约 1.4 万条目）由脚�
 它的准入门槛里有两条值得注意：
 
 1. **必须声明 `license`** —— 本包已是 MIT；
-2. **必须有可访问的仓库地址** —— 即 `package.json` 的 `repository`，
-   所以发布前请把它填成你的 GitHub 仓库地址（`npm run pack:check` 会以 `!` 提示这一项）。
+2. **必须有可访问的仓库地址** —— 即 `package.json` 的 `repository`。
+   本包已填为 <https://github.com/koking0/dsh-plugin-google>（公开仓库，MIT）。
+   若你 fork 后另发一版，记得改成自己的地址（`npm run pack:check` 会在缺失时以 `!` 提示）。
 
 另外建议填 `dsh.catalog`（本包已填）：`category` + 中英双语 `summary` + `capabilities`，
 市场页面会直接展示这些内容。**收录前 Marketplace 不做人工审核**，安装时会按社区来源提示确认。
