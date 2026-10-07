@@ -1,0 +1,83 @@
+{
+  "name": "dsh-plugin-google",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DeepSeek Harness plugin for Google Calendar and Google Tasks: conversational CRUD over events, calendars, tasks and task lists, with built-in OAuth 2.0 loopback authorization",
+  "license": "MIT",
+  "author": "alex007",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koking0/dsh-plugin-google.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koking0/dsh-plugin-google/issues"
+  },
+  "homepage": "https://github.com/koking0/dsh-plugin-google#readme",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "google-calendar",
+    "google-tasks",
+    "calendar",
+    "tasks",
+    "todo",
+    "oauth2"
+  ],
+  "meta": {
+    "title": "Google 日历与任务",
+    "description": "通过对话管理 Google 日历与 Google Tasks：日程、日历、待办、任务列表的增删改查、忙闲查询与每日汇总。"
+  },
+  "icon": "./icon.svg",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "scripts",
+    "test",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "catalog": {
+      "category": "integration",
+      "summary": {
+        "en": "Google Calendar and Google Tasks for DSH: 30 tools for events, calendars, to-dos and task lists, with built-in OAuth 2.0 desktop authorization and no third-party runtime dependencies.",
+        "zh": "把 Google 日历与 Google Tasks 接入 DSH：30 个工具覆盖日程、日历、待办与任务列表的增删改查，内置 OAuth 2.0 桌面授权，零第三方运行时依赖。"
+      },
+      "capabilities": [
+        "Calendar events CRUD, including single recurring instances",
+        "Cross-calendar event queries with natural-language times",
+        "Google Tasks and task lists CRUD, subtasks, cross-list moves",
+        "Free/busy lookup across several calendars at once",
+        "Daily agenda: events + due tasks + overdue + conflicts",
+        "Built-in OAuth 2.0 loopback authorization"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/dsh-tools": "^0.1.5-rc.3 || ^0.2.0-rc.1",
+    "@deepseek-ai/schemastery": "^3.18.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "node scripts/check-package.mjs"
+  }
+}

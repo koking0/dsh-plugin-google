@@ -1,0 +1,21 @@
+# 依赖
+node_modules/
+
+# 打包产物
+*.tgz
+*.tar.gz
+
+# ⚠️ 凭据绝不应进仓库 —— 它们是每台机器自己的
+# 默认位置是 $DSH_HOME/google-oauth-client.json 与 google-oauth-token.json
+google-oauth-client.json
+google-oauth-token.json
+*.token
+.env
+.env.*
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

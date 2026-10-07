@@ -1,0 +1,33 @@
+# Google 日历与任务插件 —— bundle 补丁层
+#
+# 这一层是**发布给所有人**的默认配置，因此刻意不包含任何与机器相关的信息：
+# 没有绝对路径、没有个人账号、没有别人的日历 ID。
+#
+# 本机专属的配置请写到 profile 自己的补丁层
+# （`<profile>/cordis.patch.yml`），用同一个 `id: google` 覆盖即可，例如：
+#
+#   - id: google
+#     config:
+#       timeZone: 'Asia/Shanghai'
+#       otherCalendarIds:
+#         - 'xxx@group.calendar.google.com'
+#
+# 凭据与令牌的默认位置（可用 clientSecretFile / tokenFile 覆盖）：
+#   $DSH_HOME/google-oauth-client.json   ← Google Cloud 下载的 OAuth 客户端 JSON
+#   $DSH_HOME/google-oauth-token.json    ← 授权后由插件自动写入
+- insert:
+    - id: google
+      name: dsh-plugin-google
+      config:
+        # 0 表示自动分配回环端口（「桌面应用」类型的 OAuth 客户端允许任意端口）。
+        # 若使用「Web 应用」类型客户端，请改为已登记的地址，例如：
+        # oauthRedirectUri: 'http://127.0.0.1:47821/oauth2callback'
+        oauthRedirectPort: 0
+        # 只给开始时间时，定时日程的默认时长（分钟）。
+        defaultEventMinutes: 60
+        # 中国大陆等网络环境通常需要代理才能访问 Google API。
+        # 留空则读取 HTTPS_PROXY / HTTP_PROXY 环境变量。
+        # proxy: 'http://127.0.0.1:7890'
+        readOnly: false
+        requireConfirmForWrites: false
+        requestTimeoutMs: 30000
