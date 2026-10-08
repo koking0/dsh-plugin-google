@@ -300,6 +300,8 @@ async function route(context) {
       const record = {
         id,
         kind: 'calendar#event',
+        // 真实 Google 返回的事件一定有 status，mock 也补齐，避免测出假象。
+        status: 'confirmed',
         summary: text,
         start: { dateTime: '2026-10-06T15:00:00+08:00', timeZone: 'Asia/Shanghai' },
         end: { dateTime: '2026-10-06T16:00:00+08:00', timeZone: 'Asia/Shanghai' },
@@ -322,7 +324,11 @@ async function route(context) {
         const target = state.events.get(destination) ?? new Map();
         state.events.set(destination, target);
         target.set(eventId, event);
-        return send(200, event);
+        // 真实 API 的实测行为：`events.move` 的响应会带上源日历那份「已取消」墓碑的
+        // status，而目标日历里实际存的是 confirmed。这里刻意复现，用来锁住
+        // 「移动后必须回读再确认」这条修复 —— 否则确认文案会出现
+        // 「已移动日程……（已取消）」这种自相矛盾的话。
+        return send(200, { ...event, status: 'cancelled' });
       }
       if (method === 'GET') return send(200, event);
       if (method === 'PATCH') {

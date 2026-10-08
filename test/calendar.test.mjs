@@ -237,6 +237,11 @@ test('gcal_quick_add 与 gcal_move_event', async () => {
 
     const moved = await h.call('gcal_move_event', { eventId, destination: 'work@example.com' });
     assert.match(moved.text, /已移动日程/);
+    // 回归：move 响应里可能带源日历那份「已取消」墓碑的 status，必须回读目标日历
+    // 才能给出正确结论 —— 否则确认文案会自相矛盾地写成「已移动……（已取消）」。
+    assert.match(moved.text, /状态：正常/);
+    assert.doesNotMatch(moved.text, /已取消/);
+    assert.equal(moved.data.status, 'confirmed');
     assert.equal(h.mock.state.events.get('primary').size, 0);
     assert.equal(h.mock.state.events.get('work@example.com').size, 1);
   });
